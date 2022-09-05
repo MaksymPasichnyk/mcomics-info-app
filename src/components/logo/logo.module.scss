@@ -1,0 +1,18 @@
+$logo-background: yellow;
+$logo-color: blue;
+
+.logo {
+	display: flex;
+	width: 56px;
+	height: 56px;
+	background-color: $logo-background;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+
+	&__title {
+		color: $logo-color;
+		font-size: 1.2rem;
+		margin-bottom: 0;
+	}
+}
