@@ -1,4 +1,13 @@
-const Card = () => {
+interface Props {
+	comic: {
+		title:string,
+		images: {}[],
+		description:string,
+
+	}
+}
+
+const Card = ({comic}: Props) => {
 	return (
 		<div className="card">
 			Content

@@ -6,13 +6,14 @@ import { Row, Col } from "antd";
 import Form from "../form/Form";
 import Input from "../common/input/Input";
 import SearchBar from "./searchBar/SearchBar";
-import { SyntheticEvent } from "react";
+import { ChangeEvent, SyntheticEvent } from "react";
 
 interface Props {
 	handleFormSubmit: (ev: SyntheticEvent) => void,
+	handleChangeField: (fieldValue:string) => void,
 }
 
-const Header = ({handleFormSubmit}: Props) => {
+const Header = ({handleFormSubmit, handleChangeField}: Props) => {
   return (
     <header className={styles.header}>
       <Container>
@@ -23,7 +24,7 @@ const Header = ({handleFormSubmit}: Props) => {
           <Col span={20}>
             <Row wrap={false} justify="end" align="middle">
               <Form handleSubmit={handleFormSubmit}>
-                <SearchBar />
+                <SearchBar handleChangeField={handleChangeField} />
               </Form>
               <Button type="button" text="Sign in" />
               <Button type="button" text="Sign up" />

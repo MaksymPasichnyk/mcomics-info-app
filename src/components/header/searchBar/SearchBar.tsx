@@ -1,15 +1,23 @@
 import React, {ChangeEvent, useState} from "react";
 import styles from "./searchBar.module.scss";
-import { SearchOutlined } from "@ant-design/icons"
+import { SearchOutlined } from "@ant-design/icons";
+import axios from "axios";
 
-const SearchBar = () => {
+interface Props {
+	handleChangeField: (fieldValue:string) => void
+}
+
+const SearchBar = ({handleChangeField}: Props) => {
 	const [fieldValue, setFieldValue] = useState("");
 
 	const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
 		const newFieldValue = ev.currentTarget.value;
 
+		console.log(fieldValue);
 		setFieldValue(newFieldValue)
+		handleChangeField(fieldValue)
 	} 
+
 
   return (
     <div className={styles["search-bar"]}>

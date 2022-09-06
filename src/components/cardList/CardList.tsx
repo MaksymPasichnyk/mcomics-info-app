@@ -1,27 +1,55 @@
-import Card from "./card/Card";
-
+//import Card from "./card/Card";
+import { Col, Row, Card, Image, Grid } from "antd";
 import styles from "./cardList.module.scss";
 
+
+const { useBreakpoint } = Grid;
+interface Comic {
+  title: string;
+  images: {
+    path: string;
+    extension: string;
+  }[];
+	id:number
+	description:string,
+}
+
 interface Props {
-	children: JSX.Element | JSX.Element[],
+  comics: Array<Comic>;
 }
 
-const CardList = () => {
-	return (
-		<div className={styles.cards}>
-			<ul className={styles["cards__list"]}>
-				{
-					[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-						return (
-							<li key={index}>
-								<Card />
-							</li>
-						)
-					})
-				}
-			</ul>
-		</div>
-	)
-}
+const CardList = ({ comics }: Props) => {
 
-export default CardList
+	const cardElements = comics.filter(({images}: Comic) => {
+		return images.length
+	}).map(({ title, images, id, description}: Comic) => {
+    const imageUrl = `${images[0]?.path}.${images[0]?.extension}`;
+
+    return (
+      <Col 
+				xs={{span: "24"}} 
+				sm={{span: "12"}} 
+				md={{span: "8"}} 
+				lg={{span: "8"}} 
+				xl={{span: "4"}}
+				xxl={{span: "2"}}
+				key={id}>
+        <Card 
+					title={title} 
+					cover={<Image height={320} src={imageUrl} />} 
+				>
+				</Card>
+      </Col>
+    );
+  });
+
+  return (
+    <div className={styles.cards}>
+      <div className={styles["cards__list"]}>
+        <Row gutter={[25, 16]}>{cardElements}</Row>
+      </div>
+    </div>
+  );
+};
+
+export default CardList;
